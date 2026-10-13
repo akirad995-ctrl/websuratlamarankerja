@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buat surat lamaran kerja, CV, dan paket dokumen lamaran dengan mudah.">
+    <title>SuratKerja — Pembuat Paket Lamaran</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Library untuk membuat PDF dari halaman HTML -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+
+    <!-- Library untuk menggabungkan dan mengolah PDF -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="navbar">
+        <a class="logo" href="#">Surat<span>Kerja.</span></a>
+        <span class="nav-label">Pembuat Paket Lamaran</span>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <span class="eyebrow">CAREER TOOLS</span>
+            <h1>Siapkan lamaran kerja dengan <span>lebih mudah.</span></h1>
+            <p>Isi data sekali untuk membuat surat lamaran, CV, dan menggabungkan dokumen pendukung ke dalam satu PDF.</p>
+        </section>
+
+        <div class="workspace">
+            <!-- FORM INPUT -->
+            <section class="panel form-panel">
+                <div class="panel-heading">
+                    <div>
+                        <span class="step">LANGKAH 01</span>
+                        <h2>Data lamaran</h2>
+                    </div>
+                    <span class="heading-icon">✦</span>
+                </div>
+
+                <form id="formLamaran">
+                    <h3 class="form-section">Informasi surat</h3>
+
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="kotaSurat">Kota surat *</label>
+                            <input id="kotaSurat" required placeholder="Contoh: Jakarta">
+                        </div>
+
+                        <div class="field">
+                            <label for="tanggalSurat">Tanggal surat *</label>
+                            <input id="tanggalSurat" type="date" required>
+                        </div>
+
+                        <div class="field full">
+                            <label for="sumberLowongan">Sumber informasi lowongan</label>
+                            <input id="sumberLowongan" placeholder="Contoh: Website perusahaan">
+                        </div>
+                    </div>
+
+                    <h3 class="form-section">Data pribadi</h3>
+
+                    <div class="form-grid">
+                        <div class="field full">
+                            <label for="nama">Nama lengkap *</label>
+                            <input id="nama" required placeholder="Nama sesuai identitas">
+                        </div>
+
+                        <div class="field full">
+                            <label for="lahir">Tempat, tanggal lahir</label>
+                            <input id="lahir" placeholder="Contoh: Jakarta, 10 Januari 2008">
+                        </div>
+
+                        <div class="field full">
+                            <label for="alamat">Alamat *</label>
+                            <textarea id="alamat" required rows="2" placeholder="Alamat domisili"></textarea>
+                        </div>
+
+                        <div class="field">
+                            <label for="email">Email *</label>
+                            <input id="email" type="email" required placeholder="nama@email.com">
+                        </div>
+
+                        <div class="field">
+                            <label for="telepon">Nomor HP *</label>
+                            <input id="telepon" type="tel" required placeholder="08xxxxxxxxxx">
+                        </div>
+
+                        <div class="field full">
+                            <label for="foto">Foto untuk CV (opsional)</label>
+                            <input id="foto" type="file" accept="image/jpeg,image/png,image/webp">
+                            <small>Format JPG, PNG, atau WebP. Maksimal 3 MB.</small>
+                            <img id="previewFoto" class="photo-preview" alt="Pratinjau foto" hidden>
+                        </div>
+                    </div>
+
+                    <h3 class="form-section">Informasi perusahaan</h3>
+
+                    <div class="form-grid">
+                        <div class="field full">
+                            <label for="perusahaan">Nama perusahaan *</label>
+                            <input id="perusahaan" required placeholder="Nama perusahaan tujuan">
+                        </div>
+
+                        <div class="field full">
+                            <label for="alamatPerusahaan">Alamat perusahaan</label>
+                            <textarea id="alamatPerusahaan" rows="2" placeholder="Alamat perusahaan jika diketahui"></textarea>
+                        </div>
+
+                        <div class="field full">
+                            <label for="posisi">Posisi yang dilamar *</label>
+                            <input id="posisi" required placeholder="Contoh: Web Developer">
+                        </div>
+                    </div>
+
+                    <h3 class="form-section">Isi CV</h3>
+
+                    <div class="field">
+                        <label for="pendidikan">Pendidikan *</label>
+                        <textarea id="pendidikan" required rows="3" placeholder="Nama sekolah/kampus, jurusan, tahun. Pisahkan tiap pendidikan dengan baris baru."></textarea>
+                    </div>
+
+                    <div class="field">
+                        <label for="keahlian">Keahlian *</label>
+                        <textarea id="keahlian" required rows="3" placeholder="Contoh: HTML, CSS, JavaScript, komunikasi, kerja tim"></textarea>
+                    </div>
+
+                    <div class="field">
+                        <label for="pengalaman">Pengalaman, organisasi, atau proyek</label>
+                        <textarea id="pengalaman" rows="4" placeholder="Tuliskan pengalaman PKL, proyek website, organisasi, atau proyek sekolah. Boleh dikosongkan."></textarea>
+                    </div>
+
+                    <h3 class="form-section">Tanda tangan</h3>
+                    <p class="helper">Gambar tanda tangan dengan jari atau mouse. Bagian ini opsional.</p>
+                    <canvas id="signaturePad" aria-label="Area tanda tangan"></canvas>
+                    <button type="button" id="hapusTtd" class="button button-light button-small">Hapus tanda tangan</button>
+
+                    <h3 class="form-section">Dokumen pendukung</h3>
+                    <p class="helper">Unggah dokumen yang memang diminta oleh perusahaan. File PDF dan gambar akan dimasukkan ke PDF akhir.</p>
+
+                    <div class="field">
+                        <label for="ijazah">Ijazah / Surat Keterangan Lulus</label>
+                        <input id="ijazah" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                    </div>
+
+                    <div class="field">
+                        <label for="transkrip">Transkrip nilai</label>
+                        <input id="transkrip" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                    </div>
+
+                    <div class="field">
+                        <label for="sertifikat">Sertifikat</label>
+                        <input id="sertifikat" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                    </div>
+
+                    <div class="field">
+                        <label for="dokumenLain">Dokumen pendukung lainnya</label>
+                        <input id="dokumenLain" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                    </div>
+
+                    <p class="helper">Maksimal 5 MB per file. Jangan mengunggah dokumen yang tidak diminta atau membagikan data pribadi kepada pihak yang tidak tepercaya.</p>
+
+                    <div class="form-actions">
+                        <button type="submit" class="button button-primary">Buat Paket Lamaran →</button>
+                        <button type="button" id="resetForm" class="button button-light">Reset</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- HASIL -->
+            <section class="panel result-panel">
+                <div class="panel-heading">
+                    <div>
+                        <span class="step">LANGKAH 02</span>
+                        <h2>Hasil lamaran</h2>
+                    </div>
+                    <span class="heading-icon">▤</span>
+                </div>
+
+                <p class="helper">Isi formulir lalu klik “Buat Paket Lamaran”. Periksa hasilnya sebelum menyimpan atau mengirimkannya.</p>
+
+                <div class="result-actions">
+                    <button type="button" id="unduhPDF" class="button button-primary" disabled>Unduh Paket PDF</button>
+                    <button type="button" id="salin" class="button button-light" disabled>Salin Surat</button>
+                    <button type="button" id="cetak" class="button button-light" disabled>Cetak / Simpan PDF</button>
+                </div>
+
+                <p id="status" class="status" role="status">Hasil lamaran akan muncul di sini.</p>
+
+                <!-- Dokumen yang akan dijadikan PDF -->
+                <div id="paketDokumen">
+                    <article id="hasilSurat" class="document">
+                        <div class="empty-state">
+                            <span>✦</span>
+                            <h3>Surat lamaranmu dimulai di sini</h3>
+                            <p>Lengkapi formulir di sebelah kiri untuk membuat dokumen.</p>
+                        </div>
+                    </article>
+
+                    <article id="hasilCV" class="document" hidden></article>
+                    <article id="hasilLampiran" class="document" hidden></article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>SuratKerja © 2026 · Periksa kembali data dan persyaratan perusahaan sebelum mengirim lamaran.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,467 @@
+:root {
+    --primary: #7653d6;
+    --primary-dark: #5936b4;
+    --light-purple: #f1edff;
+    --background: #f8f7fc;
+    --text: #28243a;
+    --muted: #77738a;
+    --border: #e8e4f0;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: var(--background);
+    line-height: 1.6;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+.navbar {
+    min-height: 72px;
+    padding: 16px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    color: var(--text);
+    font-size: 23px;
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: -1px;
+}
+
+.logo span,
+.hero h1 span {
+    color: var(--primary);
+}
+
+.nav-label {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.container {
+    width: min(1400px, 94%);
+    margin: 0 auto;
+}
+
+.hero {
+    max-width: 760px;
+    margin: 42px auto 34px;
+    text-align: center;
+}
+
+.eyebrow,
+.step {
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.hero h1 {
+    margin: 10px 0;
+    font-size: clamp(29px, 4vw, 45px);
+    line-height: 1.2;
+    letter-spacing: -1.3px;
+}
+
+.hero p {
+    max-width: 650px;
+    margin: 12px auto 0;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: start;
+    gap: 24px;
+    margin-bottom: 50px;
+}
+
+.panel {
+    min-width: 0;
+    padding: 26px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 8px 30px #39246a08;
+}
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 20px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+}
+
+.panel-heading h2 {
+    margin: 3px 0 0;
+    font-size: 22px;
+}
+
+.heading-icon {
+    display: grid;
+    place-items: center;
+    width: 43px;
+    height: 43px;
+    color: var(--primary);
+    background: var(--light-purple);
+    border-radius: 13px;
+    font-size: 22px;
+}
+
+.form-section {
+    margin: 25px 0 15px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.field {
+    min-width: 0;
+    margin-bottom: 16px;
+}
+
+.field.full {
+    grid-column: 1 / -1;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.field input:not([type="file"]),
+.field textarea {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    padding: 11px 12px;
+    color: var(--text);
+    background: #fcfbff;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus,
+.field textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px #7653d618;
+}
+
+.field textarea {
+    resize: vertical;
+}
+
+.field input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 9px;
+    background: #fcfbff;
+    border: 1px dashed #c9bedf;
+    border-radius: 9px;
+    font-size: 12px;
+}
+
+.field small,
+.helper {
+    display: block;
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.photo-preview {
+    display: block;
+    width: 100px;
+    height: 125px;
+    margin-top: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+#signaturePad {
+    display: block;
+    width: 100%;
+    height: 150px;
+    background: #fcfbff;
+    border: 1px dashed #b8a7dc;
+    border-radius: 10px;
+    touch-action: none;
+    cursor: crosshair;
+}
+
+.form-actions,
+.result-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 43px;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.button:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.button-primary {
+    color: white;
+    background: var(--primary);
+}
+
+.button-primary:hover:not(:disabled) {
+    background: var(--primary-dark);
+}
+
+.button-light {
+    color: var(--text);
+    background: #f4f1fa;
+    border-color: var(--border);
+}
+
+.button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.button-small {
+    min-height: 34px;
+    margin-top: 8px;
+    padding: 7px 10px;
+    font-size: 12px;
+}
+
+.status {
+    padding: 10px 12px;
+    color: #5c4b87;
+    background: var(--light-purple);
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.document {
+    width: 100%;
+    margin-top: 18px;
+    padding: 32px;
+    overflow-wrap: anywhere;
+    color: #222;
+    background: white;
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 24px #30224f0a;
+    font-family: "Times New Roman", serif;
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.document h2 {
+    margin: 0 0 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.document h3 {
+    font-size: 15px;
+}
+
+.document p {
+    margin: 0 0 12px;
+    white-space: pre-wrap;
+}
+
+.document .signature-image {
+    display: block;
+    width: 160px;
+    max-height: 80px;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.document .cv-photo {
+    display: block;
+    width: 105px;
+    height: 130px;
+    margin: 12px auto;
+    border: 1px solid #ddd;
+    object-fit: cover;
+}
+
+.document .cv-name {
+    margin: 8px 0;
+    font-size: 24px;
+    text-align: center;
+}
+
+.document .cv-contact {
+    text-align: center;
+}
+
+.document .cv-section {
+    margin-top: 22px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #bbb;
+}
+
+.document .attachment-item {
+    padding: 9px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.empty-state {
+    padding: 45px 10px;
+    text-align: center;
+}
+
+.empty-state span {
+    color: var(--primary);
+    font-size: 30px;
+}
+
+.empty-state p {
+    color: var(--muted);
+}
+
+footer {
+    padding: 24px 5%;
+    color: var(--muted);
+    background: white;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 12px;
+}
+
+@media (max-width: 1000px) {
+    .workspace {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    .navbar {
+        padding: 14px 5%;
+    }
+
+    .nav-label {
+        max-width: 130px;
+        text-align: right;
+    }
+
+    .hero {
+        margin-top: 28px;
+    }
+
+    .panel {
+        padding: 18px;
+        border-radius: 13px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .field.full {
+        grid-column: auto;
+    }
+
+    .document {
+        padding: 20px 16px;
+        font-size: 12px;
+    }
+
+    .form-actions .button,
+    .result-actions .button {
+        flex: 1 1 100%;
+    }
+}
+
+/* Saat mencetak halaman, tampilkan dokumen hasil saja. */
+@media print {
+    body {
+        background: white;
+    }
+
+    .navbar,
+    .hero,
+    .form-panel,
+    .result-panel > .panel-heading,
+    .result-panel > .helper,
+    .result-actions,
+    .status,
+    footer {
+        display: none !important;
+    }
+
+    .container,
+    .workspace,
+    .result-panel {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+    }
+
+    #paketDokumen {
+        display: block;
+    }
+
+    .document {
+        margin: 0;
+        padding: 15mm;
+        border: none;
+        box-shadow: none;
+        break-after: page;
+        page-break-after: always;
+    }
+
+    .document:last-child {
+        break-after: auto;
+        page-break-after: auto;
+    }
+}
